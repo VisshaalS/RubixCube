@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Solverino</string>
+    <string name="welcome">Welcome to the Rubik\'s Cube Solver</string>
+    <string name="open_gal">Open Gallery</string>
+    <string name="take_pic">Take Picture</string>
 </resources>
