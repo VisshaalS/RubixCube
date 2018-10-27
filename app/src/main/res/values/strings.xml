@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Solverino</string>
     <string name="welcome">Welcome to the Rubik\'s Cube Solver</string>
-    <string name="open_gal">Open Gallery</string>
-    <string name="take_pic">Take Picture</string>
+    <string name="start">Start Calculations</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="front">Front</string>
+    <string name="back">Back</string>
 </resources>
