@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bPic = findViewById(R.id.bPic);
-     
+
 
 
 
