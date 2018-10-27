@@ -20,49 +20,56 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bPic;
+    Button openGal;
     ImageView imageResult;
+
+    // Variables used for picking an image from gallery
+    public static final int PICK_IMAGE = 1;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // init button to open the camera
         bPic = findViewById(R.id.bPic);
-
         bPic.setOnClickListener(this);
 
         imageResult = findViewById(R.id.imageResult);
 
+        // init the button to open the gallery
+        openGal = findViewById(R.id.openGal);
+        openGal.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        if (v == bPic) {
-            File photoFile = null;
-            try{
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String imageFileName = "JPEG_" + timeStamp + "_";
-                File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                photoFile = File.createTempFile(imageFileName,".jpg", storageDir);
-                // Save a file: path for use with ACTION_VIEW intents
-            } catch(IOException ex){
-                // Error occurred while trying to save the file
-            }
+        switch (v.getId()){
 
-            if(photoFile != null){
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
-                        photoFile);
+            case R.id.bPic:
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivity(takePicture);
-            }
+                break;
 
-
+            case R.id.openGal:
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                imageView = findViewById(R.id.imageResult);
+                startActivityForResult(intent, PICK_IMAGE);
+                break;
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE){
+            Uri imageUri = data.getData();
+            imageView.setImageURI(imageUri);
+        }
+    }
 
 }
