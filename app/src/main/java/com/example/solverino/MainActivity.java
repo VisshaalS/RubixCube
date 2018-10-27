@@ -3,6 +3,8 @@ package com.example.solverino;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -161,6 +163,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
+    }
+
+    public void identifyColor(Uri imageUri){
+        imageView.setImageURI(imageUri);
+        int height =  imageView.getHeight();
+        int weight = imageView.getWidth();
+        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        int topLeft = bitmap.getPixel(height/6,weight/6);
+        int topMiddle = bitmap.getPixel(height/6,weight/2);
+        int topRight = bitmap.getPixel(height/6,weight*(5/6));
+        int midLeft = bitmap.getPixel(height/2,weight/6);
+        int midMiddle = bitmap.getPixel(height/2,weight/2);
+        int midRight = bitmap.getPixel(height/2,weight*(5/6));
+        int botLeft = bitmap.getPixel(height*(5/6),weight/6);
+        int botMiddle = bitmap.getPixel(height*(5/6),weight/2);
+        int botRight = bitmap.getPixel(height*(5/6),weight*(5/6));
+
+        int blue  = Color.blue(topLeft);
+
+
+
+
+        imageView.setVisibility(View.INVISIBLE);
+
+
     }
 
 }
